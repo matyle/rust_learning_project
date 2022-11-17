@@ -30,6 +30,7 @@ fn main() {
     test_string();
     test_tuple();
     test_struct();
+    test_enum();
 }
 
 fn test_string() {
@@ -261,9 +262,63 @@ enum Option<T> {
     Some(T),
     None,
 }
-fn enum_test() {
+
+//枚举
+
+#[derive(Debug)]
+enum PokerSuit {
+    Clubs,
+    Spades,
+    Diamonds,
+    Hearts,
+}
+
+struct PokerCard {
+    suit: PokerSuit,
+    value: u8,
+}
+
+// 直接用枚举
+enum PokerCard2 {
+    Clubs(u8), //枚举值中带数据
+    Spades(u8),
+    Diamonds(char),
+    Hearts(char),
+}
+fn test_enum() {
     let options = Option::Some(5);
     println!("{:?}", options);
+
+    let heart = PokerSuit::Hearts;
+    let diamond = PokerSuit::Diamonds;
+    print_suit(heart);
+
+    let c1 = PokerCard {
+        suit: PokerSuit::Clubs,
+        value: 1,
+    };
+    let c2 = PokerCard {
+        suit: PokerSuit::Diamonds, //diamond,
+        value: 2,
+    };
+
+    let c1 = PokerCard2::Clubs(2);
+    let c2 = PokerCard2::Diamonds('A');
+    match_suit(c1);
+    match_suit(c2);
+}
+
+fn print_suit(card: PokerSuit) {
+    println!("card = {:?}", card);
+}
+
+fn match_suit(card: PokerCard2) {
+    match card {
+        PokerCard2::Clubs(value) => println!("Clubs {}", value),
+        PokerCard2::Diamonds(value) => println!("Diamonds {}", value),
+        PokerCard2::Spades(value) => println!("Spades {}", value),
+        PokerCard2::Hearts(value) => println!("Hearts {}", value),
+    }
 }
 
 //一般参数会使用切片，而不是String 通用性
