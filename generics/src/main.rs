@@ -12,6 +12,8 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b //报错
 }
 
+// fn sqrt<T: std::sqrt>
+
 struct Point<T> {
     x: T,
     y: T,
