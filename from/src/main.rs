@@ -54,7 +54,7 @@ impl From<&str> for Person {
 
         let name = person[0];
 
-        if name.len() <= 0 {
+        if name.is_empty() {
             return default;
         }
         p.name = name.to_string();
