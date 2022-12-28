@@ -1,4 +1,7 @@
-mod future;
+mod asynclearn;
+mod futurelearn;
+use futures::executor::block_on;
 fn main() {
-    println!("Hello, world!");
+    let f = asynclearn::do_some();
+    block_on(f)
 }
